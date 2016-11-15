@@ -1,12 +1,16 @@
 package com.virra.recyclerview2;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -15,44 +19,93 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Perro> perros;
-    @Bind(R.id.reciclermascotas)
-    RecyclerView reciclermascotas;
-    @Bind(R.id.estrella)
-    ImageView estrella;
-    @Bind(R.id.activity_main)
-    RelativeLayout activityMain;
+
+
+    PerroAdaptador adaptador;
+
+
+    @Bind(R.id.barra)
+    AppBarLayout barra;
+
+    @Bind(R.id.viewPager)
+    ViewPager viewPager;
+
+    @Bind(R.id.tablayout)
+    TabLayout tablayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        perros = new ArrayList<Perro>();
 
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        reciclermascotas.setLayoutManager(llm);
-
-        perros.add(new Perro(R.drawable.images, "Perro1", "5"));
-        perros.add(new Perro(R.drawable.perro, "perro", "4"));
-        perros.add(new Perro(R.drawable.perro2, "perro2", "6"));
-        perros.add(new Perro(R.drawable.perro3, "perro3", "7"));
-        perros.add(new Perro(R.drawable.perro4, "perro4", "2"));
+        SetupViewPager();
 
 
-        PerroAdaptador adaptador = new PerroAdaptador(perros, this);
-        reciclermascotas.setAdapter(adaptador);
-        //recyclermascotas.getAdapter(adaptador);
+    }
 
 
+    private ArrayList<Fragment> agregarFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new Fragment_reclycerview());
+        fragments.add(new PerfilFragment());
+
+        return fragments;
+    }
+
+    public void SetupViewPager() {
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tablayout.setupWithViewPager(viewPager);
+
+        tablayout.getTabAt(0).setIcon(R.drawable.estrella);
+        tablayout.getTabAt(1).setIcon(R.drawable.dog_50);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_opciones, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.macerca_de:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.facebook.com/victorcastro.irresistiblementecosteno"));
+                startActivity(intent);
+                break;
+            case R.id.mconfiguracion:
+                Intent inn = new Intent(this, Contacto.class);
+               // in.putExtra("nombre", "hola que hace?");
+                Log.e(getLocalClassName(),"VA A ENTRAR!!!");
+                startActivity(inn);
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        adaptador.getItemSelected(item);
+        return super.onContextItemSelected(item);
     }
 
     @OnClick(R.id.estrella)
     public void onClick() {
-        Intent in = new Intent(this,MascotasFavoritas.class);
-        in.putExtra("nombre","holos");
-        this.startActivity(in);
+        Intent in = new Intent(this, MascotasFavoritas.class);
+        in.putExtra("nombre", "hola que hace?");
+        Log.e(getLocalClassName(),"clic en estrella");
+        startActivity(in);
     }
+
 }
+

@@ -12,12 +12,15 @@ public class MascotasFavoritas extends AppCompatActivity {
     @Bind(R.id.textView)
     TextView textView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mascotas_favoritas);
         ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Bundle parametros = getIntent().getExtras();
         String nom = parametros.getString("nombre");
@@ -25,6 +28,6 @@ public class MascotasFavoritas extends AppCompatActivity {
         textView.setText(nom);
 
 
-
     }
+
 }

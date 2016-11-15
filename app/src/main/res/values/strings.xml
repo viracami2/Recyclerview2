@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Recyclerview2</string>
+    <string name="menu_about">Acerca de </string>
+    <string name="menu_contacto">Contacto </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hola este es un new fragment</string>
+    <string name="title_activity_contacto">Contacto</string>
+
+
 </resources>
