@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/meditar"
+        android:title="Editar"
+        android:orderInCategory="1"
+        >  </item>
+
+    <item
+        android:id="@+id/meliminar"
+        android:title="Eliminar"
+        android:orderInCategory="2"></item>
+
+</menu>

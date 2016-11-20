@@ -15,44 +15,42 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by USUARIO on 20/09/2016.
+ * Created by USUARIO on 19/11/2016.
  */
 
-public class PerroAdaptador  extends  RecyclerView.Adapter<PerroAdaptador.PerroViewHolder> {
-ArrayList <Perro> perros;
+public class PerfilPerroAdaptador  extends  RecyclerView.Adapter<PerfilPerroAdaptador.PerroViewHolder>{
+
+
+    ArrayList<Perro> perros;
     Activity activity;
     String  a;
 
-    public PerroAdaptador(ArrayList<Perro> perros,Activity activity) {
+    public PerfilPerroAdaptador(ArrayList<Perro> perros,Activity activity) {
         this.activity = activity;
         this.perros = perros;
 
     }
 
     @Override
-    public PerroViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_perro,parent,false);
-        return new PerroViewHolder(v);
+    public PerfilPerroAdaptador.PerroViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_perfilperro,parent,false);
+        return new PerfilPerroAdaptador.PerroViewHolder(v);
 
     }
 
     @Override
-    public void onBindViewHolder(PerroViewHolder holder, int position) {
+    public void onBindViewHolder(PerfilPerroAdaptador.PerroViewHolder holder, int position) {
         final Perro perro=perros.get(position);
 
         holder.nombre.setText(perro.getNombre());
-        holder.megusta.setText(perro.getMegusta());
+        //holder.megusta.setText(perro.getMegusta());
         holder.foto_perro.setImageResource(perro.getFoto());
 
 
         holder.foto_perro.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-              //  Intent inn = new Intent(this, PerfilFragment.class);
-                // in.putExtra("nombre", "hola que hace?");
-            //    startActivity(inn);
-
-                Toast.makeText(activity,perro.getNombre()+"prueba",Toast.LENGTH_LONG).show();
+                Toast.makeText(activity,perro.getNombre(),Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -98,17 +96,17 @@ ArrayList <Perro> perros;
 
 
     public static  class PerroViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener,View.OnCreateContextMenuListener{
-            private TextView nombre;
-            private TextView megusta;
-            private ImageView foto_perro;
-            LongClickListener longClickListener;
+        private TextView nombre;
+        private TextView megusta;
+        private ImageView foto_perro;
+        LongClickListener longClickListener;
 
 
 
         public PerroViewHolder(View itemView ){
-            super(itemView);
+            super(itemView);//cog cfo
             nombre = (TextView)itemView.findViewById(R.id.nombre_perro);
-            megusta = (TextView)itemView.findViewById(R.id.numero_me_gusta);
+            //megusta = (TextView)itemView.findViewById(R.id.numero_me_gusta);
             foto_perro = (ImageView) itemView.findViewById(R.id.imgperro);
 
             itemView.setOnLongClickListener(this);
@@ -117,10 +115,10 @@ ArrayList <Perro> perros;
 
 
             nombre.setOnCreateContextMenuListener(this);
-                    }
+        }
 
         public void setLongClickListener (LongClickListener lc) {
-              this.longClickListener=lc;
+            this.longClickListener=lc;
         }
 
 
@@ -131,7 +129,7 @@ ArrayList <Perro> perros;
             menu.setHeaderTitle("Selecciona Una Opcion");
             menu.add(0,0, 1,R.string.menu_about);//groupId, itemId, order, title
             menu.add(0, 1, 2,"Eliminar");
-           }
+        }
 
 
 
@@ -144,6 +142,4 @@ ArrayList <Perro> perros;
         }
     }
 
-
-    }
-
+}

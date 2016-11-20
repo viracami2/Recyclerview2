@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new Fragment_reclycerview());
         fragments.add(new PerfilFragment());
+        
 
         return fragments;
     }
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         tablayout.getTabAt(0).setIcon(R.drawable.estrella);
         tablayout.getTabAt(1).setIcon(R.drawable.dog_50);
+
 
     }
 
@@ -95,8 +98,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        adaptador.getItemSelected(item);
+
+        Log.e(getLocalClassName(),"clic en estrell ->"+item.getItemId());
+        Log.e(String.valueOf(this),"entro??");
+        if (item.getItemId()==0) {
+            Toast.makeText(this, "opcion editar"+item.getItemId(), Toast.LENGTH_SHORT).show();
+
+
+        }if(item.getItemId()==1) {
+            int  a =item.getItemId();
+
+            Toast.makeText(this, item.getTitle() + " opcion eliminar : " + a, Toast.LENGTH_SHORT).show();
+
+        }
+       //adaptador.getItemSelected(item);
+
         return super.onContextItemSelected(item);
+
+
+
     }
 
     @OnClick(R.id.estrella)

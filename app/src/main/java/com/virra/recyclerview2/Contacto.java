@@ -95,7 +95,6 @@ public class Contacto extends AppCompatActivity {
 
             }catch (Exception e){
                 e.printStackTrace();
-              //  Log.e(getLocalClassName(),e+"");
 
             }
     }
