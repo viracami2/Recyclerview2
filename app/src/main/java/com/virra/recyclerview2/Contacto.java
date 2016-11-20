@@ -62,8 +62,11 @@ public class Contacto extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-             co="viracami3@gmail.com";
-             pass="123456789victor";
+
+          //en co a tu correo
+        // y en pass va la contraseña del correo
+             co="correo@gmail.com";
+             pass="contraseña";
         Properties properties = new Properties();
         properties.put("mail.smtp.host","smtp.googlemail.com");
         properties.put("mail.smtp.socketFactory.port","465");
